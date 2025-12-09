@@ -3,13 +3,14 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    [SerializeField] protected int _Damage;
+    [SerializeField] protected float _Damage;
     [SerializeField] protected float _FireRate;
     protected float _nextFireTime;
 
     protected Animator _animator;
     
     public abstract void Shoot();
+    public abstract void AnimShoot();
 
     protected virtual void Awake()
     {

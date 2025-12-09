@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edde51588a23741afa6174d97376377e, type: 3}
+  m_Name: Staff
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponSO
+  PrefabWeapon: {fileID: 7671034950649845579, guid: c0e7c47e42d884446b93a08bf623ea89, type: 3}
+  _WeaponName: Staff
+  _Damage: 0
+  _StaminaCost: 0
+  _ManaCost: 0

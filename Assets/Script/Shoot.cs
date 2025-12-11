@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour
 {
+
     private Weapon _currentWeapon => GetComponentInChildren<Weapon>();
 
     private void Update()

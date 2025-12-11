@@ -12,6 +12,8 @@ public abstract class Weapon : MonoBehaviour
     public abstract void Shoot();
     public abstract void AnimShoot();
 
+
+
     protected virtual void Awake()
     {
         if (_animator == null)

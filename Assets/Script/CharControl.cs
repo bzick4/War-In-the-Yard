@@ -4,48 +4,45 @@ using UnityEngine;
 public class CharControl : MonoBehaviour
 {
     [SerializeField] private float _MoveSpeed = 5f;
-    private CharacterController _characterController;
-    private Animator _animator;
-    private bool _isWatchingTime;
+    [SerializeField] private float _RunSpeed = 8f;
+    [SerializeField] private float _RotationSpeed = 200f;
+    private CharacterController _characterController=> GetComponent<CharacterController>();
+    private Animator _animator => GetComponent<Animator>();
+
 
     private void Start()
     {
-        _characterController = GetComponent<CharacterController>();
-        _animator = GetComponentInChildren<Animator>();
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        // Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.visible = false;
     }
 
     private void Update()
     {
-        LookWatch();
+        Move();
+    }
+
+    private void Move()
+    {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Vector3 move = transform.right * horizontal + transform.forward * vertical;
+         bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        float speed = isRunning ? _RunSpeed : _MoveSpeed;
+        transform.Rotate(Vector3.up * horizontal * _RotationSpeed * Time.deltaTime);
 
+        //Vector3 move = transform.right * horizontal + transform.forward * vertical;
+        Vector3 move = transform.forward * vertical * speed * Time.deltaTime;
         _characterController.Move(move * _MoveSpeed * Time.deltaTime);
+
+         if (_animator != null)
+        {
+            float blend = Mathf.Abs(vertical) > 0 ? (isRunning ? 2f : 1f) : 0f;
+            _animator.SetFloat("Blend", blend, 0.2f, Time.deltaTime);
+        }
+        
     }
 
-    private void LookWatch()
-    {
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-            if (!_isWatchingTime)
-            {
-                // Начинаем смотреть на часы
-                _isWatchingTime = true;
-                _animator.SetBool("IsWatchingTime", true);
-                Debug.Log("Started looking at watch");
-            }
-            else
-            {
-                // Заканчиваем смотреть на часы
-                _isWatchingTime = false;
-                _animator.SetBool("IsWatchingTime", false);
-                Debug.Log("Stopped looking at watch");
-            }
-        }
-    }
+
+    
 }
 

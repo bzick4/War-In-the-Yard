@@ -1096,13 +1096,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663951568}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.10713175, y: 0, z: 0, w: 0.9942449}
-  m_LocalPosition: {x: 0, y: 1.2, z: 0.07}
+  m_LocalRotation: {x: 0.24446774, y: 0, z: 0, w: 0.9696574}
+  m_LocalPosition: {x: 87.66183, y: 2.3960009, z: 10.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1260044267}
-  m_LocalEulerAnglesHint: {x: 12.3, y: 0, z: 0}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 15.014, y: 0, z: 0}
 --- !u!114 &663951570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1110,7 +1110,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663951568}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2085535658d2a4c13a711572c9cfef1f, type: 3}
   m_Name: 
@@ -1124,7 +1124,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 663951568}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
   m_Name: 
@@ -1878,9 +1878,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSwitch
   _RightHandTransform: {fileID: 1846146404}
   _Weapons:
-  - {fileID: 11400000, guid: f54021add27ec43419142f3b47757c3d, type: 2}
-  - {fileID: 11400000, guid: ec9696707801347c5a420b19c5c053cf, type: 2}
-  - {fileID: 11400000, guid: 6522eda01341c4f39a5b57171e95a4c1, type: 2}
+  - {fileID: 11400000, guid: 2e2a26eb4ca664a90b2f16a5c251a375, type: 2}
+  - {fileID: 11400000, guid: 43a092f0b8f0b4eb390008095ecd3220, type: 2}
+  - {fileID: 11400000, guid: 1e524e9cbb57b4a8f92fc088ab29bc57, type: 2}
 --- !u!114 &1260044263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1959,7 +1959,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb9448f4bb08c429bab3c258bf70714e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharControl
-  _MoveSpeed: 5
+  _MoveSpeed: 15
+  _RunSpeed: 25
+  _RotationSpeed: 200
 --- !u!4 &1260044267 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fdcafaaa0502446a4bbf0e7295734ac6, type: 3}
@@ -1983,7 +1985,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1428032310
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2004,7 +2006,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 0}
+    TrackingTarget: {fileID: 1606672211}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
@@ -2035,8 +2037,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1428032307}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.023531191, y: -0.70671517, z: 0.023531191, w: 0.7067151}
-  m_LocalPosition: {x: 91.06, y: 1.844, z: 54.84143}
+  m_LocalRotation: {x: 0.24446774, y: 0, z: 0, w: 0.9696574}
+  m_LocalPosition: {x: 87.66183, y: 2.3960009, z: 10.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2051,10 +2053,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 1428032307}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e8b78ac948f05a46a6d8339a503172b, type: 3}
+  m_Script: {fileID: 11500000, guid: f38bda98361e1de48a4ca2bd86ea3c17, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineHardLookAt
-  LookAtOffset: {x: 0, y: 0, z: 0}
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineRotationComposer
+  Composition:
+    ScreenPosition: {x: 0, y: 0}
+    DeadZone:
+      Enabled: 0
+      Size: {x: 0.2, y: 0.2}
+    HardLimits:
+      Enabled: 0
+      Size: {x: 0.8, y: 0.8}
+      Offset: {x: 0, y: 0}
+  CenterOnActivate: 1
+  TargetOffset: {x: 0, y: -0.23, z: 0}
+  Damping: {x: 0.5, y: 0.5}
+  Lookahead:
+    Enabled: 0
+    Time: 0
+    Smoothing: 0
+    IgnoreY: 0
 --- !u!114 &1428032313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2064,16 +2082,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1428032307}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b617507da6d07e749b7efdb34e1173e1, type: 3}
+  m_Script: {fileID: 11500000, guid: 625c14eee3ad46c99df7c7c891ef668a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineFollow
-  TrackerSettings:
-    BindingMode: 4
-    PositionDamping: {x: 0, y: 0, z: 0}
-    AngularDampingMode: 0
-    RotationDamping: {x: 1, y: 1, z: 1}
-    QuaternionDamping: 1
-  FollowOffset: {x: 0.45, y: 0.03, z: 0}
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineThirdPersonFollow
+  Damping: {x: 0.1, y: 0.5, z: 0.3}
+  ShoulderOffset: {x: 0, y: -0.04, z: -0.3}
+  VerticalArmLength: 1
+  CameraSide: 1
+  CameraDistance: 1.91
+  AvoidObstacles:
+    Enabled: 0
+    CollisionFilter:
+      serializedVersion: 2
+      m_Bits: 1
+    IgnoreTag: 
+    CameraRadius: 0.2
+    DampingIntoCollision: 0
+    DampingFromCollision: 0.5
 --- !u!1 &1513123149
 GameObject:
   m_ObjectHideFlags: 0
@@ -2242,6 +2267,37 @@ MonoBehaviour:
   viewAdapterOptions: {fileID: 0}
   viewModelPropertyName: ViewModel.HealthPercent
   viewPropertyName: UnityEngine.UI.Image.fillAmount
+--- !u!1 &1606672210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1606672211}
+  m_Layer: 0
+  m_Name: Follow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1606672211
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1606672210}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.366, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1260044267}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1649887275
 GameObject:
   m_ObjectHideFlags: 0
@@ -2297,7 +2353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1773508614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2311,6 +2367,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharControl
   _MoveSpeed: 5
+  _RunSpeed: 8
+  _RotationSpeed: 200
 --- !u!143 &1773508615
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2495,7 +2553,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1846146404}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: ItemHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2570,14 +2628,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fdcafaaa0502446a4bbf0e7295734ac6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: fdcafaaa0502446a4bbf0e7295734ac6, type: 3}
       insertIndex: 0
-      addedObject: {fileID: 663951569}
+      addedObject: {fileID: 1606672211}
     - targetCorrespondingSourceObject: {fileID: -1213585064213224452, guid: fdcafaaa0502446a4bbf0e7295734ac6, type: 3}
       insertIndex: 0
       addedObject: {fileID: 1846146404}
@@ -2609,6 +2667,7 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 158182143}
   - {fileID: 1186683582}
+  - {fileID: 663951569}
   - {fileID: 1428032311}
   - {fileID: 1773508619}
   - {fileID: 433161106}

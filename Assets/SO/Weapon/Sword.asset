@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 115b3328f0dbf477bb2cc97c2b42558e, type: 3}
+  m_Script: {fileID: 11500000, guid: edde51588a23741afa6174d97376377e, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: Assembly-CSharp::WeaponInfo
-  ItemName: Sword
-  WeaponPrefab: {fileID: 6569534399893998931, guid: 7e5caf14c7e534df4b8dc02f406f93a0, type: 3}
-  WeaponName: Sword
-  Damage: 0
-  AttackSpeed: 0
-  StaminaCost: 0
-  ManaCost: 0
-  weaponType: 0
+  PrefabWeapon: {fileID: 436816947618513075, guid: 8c192f437fab84b9baa9ec4dc4f19848, type: 3}
+  _WeaponName: Sword 1
+  _Damage: 0
+  _StaminaCost: 0
+  _ManaCost: 0

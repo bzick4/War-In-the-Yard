@@ -55,7 +55,7 @@ public class Wand : Weapon
     {
         if (_dataView.CurrentManna >= manaCostPerShot)
             {
-                PlayTrigger("AttackStick");
+                PlayTrigger("AttackWand");
                 _dataView.UseManna(manaCostPerShot);
                 UpdateFireTime();
             }

@@ -97,25 +97,60 @@ public class Staff : Weapon
     [SerializeField] private string bulletPrefabResourcePath = "Prefabs/Bullet";
     [SerializeField] private float _BulletSpeed = 30f;
 
-    [Header("Дробовик настройки")]
+
     [SerializeField] private int pelletCount = 5;
-    [SerializeField] private float spreadAngle = 10f; // градусов (шире -> сильнее разброс)
+    [SerializeField] private float spreadAngle = 25f;
+
+    private float _manaCostPerShot = 15f;
+    private float _staminaCostPerShot = 15f;
 
     private GameObject _bulletPrefab;
+    
     private BulletPool _bulletPool;
     private bool isBursting = false;
+
 
     protected override void Awake()
     {
         base.Awake();
-
+    
         _bulletPrefab = Resources.Load<GameObject>(bulletPrefabResourcePath);
 
         if (_bulletPrefab == null)
             Debug.LogWarning("Префаб пули не найден: " + bulletPrefabResourcePath);
 
-        // попробуем сразу получить пул, но AnimShoot также делает EnsurePool()
+        
         _bulletPool = FindObjectOfType<BulletPool>();
+    }
+
+    public void UseResource()
+    {
+        PlayTrigger("AttackStaff");
+        UseManna(_manaCostPerShot);
+        UseStamina(_staminaCostPerShot);
+        
+        Debug.Log($"посох: дробовой выстрел {pelletCount} пуль");
+        UpdateFireTime();
+    }
+
+    private void UseStamina(float staminaCostPerShot)
+    {
+        _staminaCostPerShot = staminaCostPerShot;
+
+        if(_dataView.CurrentStamina >= staminaCostPerShot)
+           _dataView.UseStamina(staminaCostPerShot);
+        else
+           Debug.Log("Staff: недостаточно выносливости для выстрела!");
+
+    }
+    public void UseManna(float manaCostPerShot)
+    {
+        _manaCostPerShot = manaCostPerShot;
+
+        if(_dataView.CurrentManna >= manaCostPerShot)
+           _dataView.UseManna(manaCostPerShot);
+        else
+           Debug.Log("Staff: недостаточно маны для выстрела!");
     }
 
     private bool EnsurePool()
@@ -129,9 +164,13 @@ public class Staff : Weapon
     {
         if (!CanShoot()) return;
 
-        PlayTrigger("AttackStaff");
-        Debug.Log($"посох: дробовой выстрел {pelletCount} пуль");
-        UpdateFireTime();
+        if (_dataView.CurrentManna < _manaCostPerShot || _dataView.CurrentStamina < _staminaCostPerShot)
+        {
+            Debug.Log("Staff: недостаточно ресурсов для выстрела.");
+            return;
+        }
+       UseResource();
+        
     }
 
     public override void AnimShoot()
@@ -171,9 +210,7 @@ public class Staff : Weapon
             Rigidbody rb = bulletGO.GetComponent<Rigidbody>();
             if (rb != null)
                 rb.linearVelocity = rotation * -_BulletSpawnPoint.right * _BulletSpeed;
-//rotation * Vector3.right * _BulletSpeed;
             
-
             StartCoroutine(ReturnAfterDelay(bulletGO, 4f));
         }
     }
@@ -182,7 +219,7 @@ public class Staff : Weapon
     {
         isBursting = true;
 
-        FireOneBurst(); // всё выстрелы одной волной
+        FireOneBurst();
 
         yield return new WaitForSeconds(0.15f); // задержка между возможными "забросами"
         isBursting = false;

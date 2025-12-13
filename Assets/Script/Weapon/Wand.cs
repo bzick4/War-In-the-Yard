@@ -9,13 +9,13 @@ public class Wand : Weapon
     [SerializeField] private int burstCount = 3;
 
     private GameObject _bulletPrefab;
-
-    private BulletPool _bulletPool; // пул теперь хранится здесь
+    private BulletPool _bulletPool;
     private bool isBursting = false;
 
     protected override void Awake()
     {
         base.Awake();
+        
 
         _bulletPrefab = Resources.Load<GameObject>(bulletPrefabResourcePath);
 
@@ -35,8 +35,7 @@ public class Wand : Weapon
     {
         if (!CanShoot() || isBursting) return;
 
-        PlayTrigger("AttackStick");
-        UpdateFireTime();
+        UseManna();
     }
 
     public override void AnimShoot()
@@ -49,6 +48,21 @@ public class Wand : Weapon
 
         if (!isBursting)
             StartCoroutine(BurstFire());
+    }
+
+    
+    private void UseManna(float manaCostPerShot=10f)
+    {
+        if (_dataView.CurrentManna >= manaCostPerShot)
+            {
+                PlayTrigger("AttackStick");
+                _dataView.UseManna(manaCostPerShot);
+                UpdateFireTime();
+            }
+            else
+            {
+               Debug.Log("Wand: недостаточно маны для выстрела!");
+            }
     }
 
     private void FireOneBullet()

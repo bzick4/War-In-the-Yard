@@ -3,21 +3,25 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
-    [SerializeField] protected float _Damage;
-    [SerializeField] protected float _FireRate;
+   [SerializeField] protected float _FireRate;
     protected float _nextFireTime;
 
     protected Animator _animator;
+    protected DataView _dataView;
     
+
     public abstract void Shoot();
     public abstract void AnimShoot();
-
+   
 
 
     protected virtual void Awake()
     {
         if (_animator == null)
-            _animator = GetComponentInParent<Animator>(); 
+            _animator = GetComponentInParent<Animator>();   
+
+        if (_dataView == null)
+            _dataView = FindFirstObjectByType<DataView>();      
     }
 
     
